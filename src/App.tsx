@@ -7,6 +7,16 @@ import Heading from "./components/Heading";
 import Oscar from "./components/Oscar";
 import Button from "./components/Button";
 import Input from "./components/Input";
+import Container from "./components/Container";
+import { ThemeContextProvider } from "./components/context/ThemeContext";
+import { UserContextProvider } from "./components/context/UserContext";
+import User from "./components/context/User";
+import Box from "./components/context/Box";
+import Private from "./components/auth/Private";
+import Profile from "./components/auth/Profile";
+import List from "./components/generics/List";
+import RandomNumber from "./components/restrictions/RandomNumber";
+import Toast from "./components/templateliterals/Toast";
 import "./App.css";
 
 function App() {
@@ -50,6 +60,36 @@ function App() {
         value=""
         handleChange={(event) => console.log(event.target.value)}
       />
+      <Container styles={{ border: "1px solid black", padding: "1rem" }} />
+      <ThemeContextProvider>
+        <Box />
+      </ThemeContextProvider>
+      <UserContextProvider>
+        <User />
+      </UserContextProvider>
+      <Private isLoggedIn={true} component={Profile} />
+      {/* <List
+        items={["Batman", "SuperMan", "Wonder", "Woman"]}
+        onClick={(item) => console.log(item)}
+      />
+      <List items={[1, 2, 3, 4]} onClick={(item) => console.log(item)} /> */}
+      <List
+        items={[
+          {
+            id: 1,
+            first: "Bruce",
+            last: "Wayne",
+          },
+          {
+            id: 2,
+            first: "Mbizzy",
+            last: "Gikunda",
+          },
+        ]}
+        onClick={(item) => console.log(item)}
+      />
+      <RandomNumber value={10} isPositive />
+      <Toast position="center" />
     </div>
   );
 }
